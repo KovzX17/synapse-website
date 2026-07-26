@@ -9,18 +9,19 @@ onScroll();
 /* ---------- Mobile nav ---------- */
 const toggle = document.querySelector('.nav-toggle');
 const links = document.querySelector('.nav-links');
-toggle.addEventListener('click', () => {
-  const open = links.classList.toggle('open');
+
+function setMenu(open) {
+  links.classList.toggle('open', open);
   toggle.classList.toggle('open', open);
   toggle.setAttribute('aria-expanded', open);
+  document.body.classList.toggle('menu-open', open);
+}
+
+toggle.addEventListener('click', () => setMenu(!links.classList.contains('open')));
+links.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 960 && links.classList.contains('open')) setMenu(false);
 });
-links.querySelectorAll('a').forEach((a) =>
-  a.addEventListener('click', () => {
-    links.classList.remove('open');
-    toggle.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-  })
-);
 
 /* ---------- Scroll reveal ---------- */
 const io = new IntersectionObserver(

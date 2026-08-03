@@ -110,18 +110,13 @@ em { font-style: italic; }
   text-decoration: none;
   color: var(--ink);
 }
-.brand-mark { width: 40px; height: 40px; }
-.brand-mark line { stroke: var(--ink); stroke-width: 4; }
-.brand-mark line.accent-line { stroke: var(--amber); }
-.brand-mark .node-main { fill: var(--ink); }
-.brand-mark .node-accent { fill: var(--amber); }
-.brand-name {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+.brand-logo {
+  display: block;
+  width: auto;
+  height: 58px;
+  transition: transform 0.3s var(--ease-out);
 }
-.brand-name em { color: var(--amber); font-weight: 400; }
+.brand:hover .brand-logo { transform: translateY(-1px); }
 
 .nav-links {
   display: flex;
@@ -317,6 +312,42 @@ em { font-style: italic; }
 @keyframes scrollcue {
   0%, 100% { transform: translateY(0); opacity: 1; }
   60% { transform: translateY(12px); opacity: 0.2; }
+}
+
+/* ============ TRUST BAR ============ */
+.trustbar {
+  background: var(--ivory-deep);
+  border-block: 1px solid var(--line);
+  padding: 2.6rem 0;
+}
+.trust-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-left: 1.6rem;
+  border-left: 1px solid var(--line);
+}
+.trust-item:first-child { border-left: none; padding-left: 0; }
+.trust-icon {
+  flex: 0 0 auto;
+  width: 40px; height: 40px;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(217, 126, 48, 0.13);
+  fill: var(--amber);
+}
+.trust-icon .stroke { fill: none; stroke: var(--amber); stroke-width: 1.8; }
+.trust-item p {
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ink);
 }
 
 /* ============ SECTIONS ============ */
@@ -526,11 +557,12 @@ em { font-style: italic; }
 
 .service {
   display: grid;
-  grid-template-columns: minmax(260px, 1.1fr) 2fr;
-  gap: 2.5rem;
-  padding: 3rem 0;
+  grid-template-columns: minmax(280px, 1fr) 1.25fr;
+  gap: 3rem;
+  padding: 3.4rem 0;
   border-top: 1px solid var(--line);
   position: relative;
+  align-items: start;
 }
 .service:last-child { border-bottom: 1px solid var(--line); }
 .service::before {
@@ -544,12 +576,16 @@ em { font-style: italic; }
 .service:hover::before { width: 100%; }
 
 .service-num {
+  display: inline-grid;
+  place-items: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--amber);
+  color: #fff;
   font-family: var(--font-display);
-  font-size: 0.9rem;
-  color: var(--amber);
-  letter-spacing: 0.14em;
-  display: block;
-  margin-bottom: 0.7rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.9rem;
 }
 .service-meta h3 {
   font-family: var(--font-display);
@@ -565,6 +601,32 @@ em { font-style: italic; }
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--ink-faded);
+}
+
+/* Product visuals from the Synapse brochure */
+.service-media {
+  margin-top: 1.6rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 0.9rem;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.service-media img {
+  display: block;
+  width: 100%;
+  height: 210px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.service-media.tall img { height: 280px; }
+/* Photographic asset fills its frame instead of sitting on a white mat */
+.service-media.photo { padding: 0; }
+.service-media.photo img {
+  height: 250px;
+  object-fit: cover;
+  border-radius: 17px;
 }
 
 .service-list { list-style: none; columns: 1; }
@@ -613,9 +675,53 @@ em { font-style: italic; }
 .contact-title em { color: var(--amber); font-weight: 350; }
 .contact-sub {
   max-width: 560px;
-  margin: 0 auto 2.6rem;
+  margin: 0 auto 3.2rem;
   color: var(--ink-faded);
   font-size: 1.12rem;
+}
+
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  text-align: left;
+}
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  padding: 1.6rem 1.3rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  text-decoration: none;
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), border-color 0.35s ease;
+}
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+  border-color: rgba(217, 126, 48, 0.5);
+}
+.contact-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+.contact-name {
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  font-weight: 560;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.contact-value {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-faded);
+  overflow-wrap: anywhere;
 }
 
 /* ============ FOOTER ============ */
@@ -624,19 +730,53 @@ em { font-style: italic; }
   color: rgba(247, 243, 234, 0.72);
   padding: 4.5rem 0 2rem;
 }
+/* Promise strip — the four commitments from the brochure footer */
+.promise-strip {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding-bottom: 3rem;
+}
+.promise-strip li {
+  position: relative;
+  padding-left: 1.7rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ivory);
+}
+.promise-strip li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.5em;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--amber-soft);
+}
+
 .footer-grid {
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr;
   gap: 3rem;
   padding-bottom: 3rem;
+  border-top: 1px solid rgba(247, 243, 234, 0.14);
   border-bottom: 1px solid rgba(247, 243, 234, 0.14);
+  padding-top: 3rem;
 }
-.site-footer .brand { color: var(--ivory); margin-bottom: 1rem; }
-.site-footer .brand-mark line { stroke: var(--ivory); }
-.site-footer .brand-mark line.accent-line { stroke: var(--amber-soft); }
-.site-footer .brand-mark .node-main { fill: var(--ivory); }
-.site-footer .brand-mark .node-accent { fill: var(--amber-soft); }
-.footer-brand p { max-width: 320px; font-size: 0.95rem; }
+.site-footer .brand { margin-bottom: 1.2rem; }
+/* The brand mark is navy-on-white artwork, so it needs a light plate on the dark footer */
+.footer-logo-chip {
+  display: inline-block;
+  background: #fff;
+  border-radius: 14px;
+  padding: 0.75rem 1.1rem;
+}
+.footer-logo-chip img {
+  display: block;
+  width: auto;
+  height: 104px;
+}
+.footer-brand p { max-width: 340px; font-size: 0.95rem; }
 
 .footer-nav h4 {
   font-family: var(--font-display);
@@ -716,17 +856,29 @@ body.menu-open { overflow: hidden; }
 @media (max-width: 900px) {
   .about-body, .vm-grid { grid-template-columns: 1fr; }
   .vm-grid { gap: 3.5rem; }
-  .service { grid-template-columns: 1fr; gap: 1.4rem; }
+  .service { grid-template-columns: 1fr; gap: 1.6rem; }
   .values-grid { grid-template-columns: 1fr 1fr; }
   .value-card, .value-card.wide { grid-column: span 1; }
   .footer-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+  .trust-grid { grid-template-columns: 1fr 1fr; gap: 1.6rem 1.2rem; }
+  .trust-item:nth-child(odd) { border-left: none; padding-left: 0; }
+  .contact-cards { grid-template-columns: 1fr 1fr; }
+  .promise-strip { grid-template-columns: 1fr 1fr; gap: 0.9rem; }
 }
 
 @media (max-width: 680px) {
   .values-grid { grid-template-columns: 1fr; }
+  .trust-grid, .contact-cards, .promise-strip { grid-template-columns: 1fr; }
+  .trust-item { border-left: none; padding-left: 0; }
+  .service-media img { height: 190px; }
+  .service-media.tall img { height: 240px; }
+  .service-media.photo img { height: 210px; }
+  .brand-logo { height: 38px; }
   .section { padding: 4.5rem 0; }
   .vision { padding: 6.5rem 0; clip-path: polygon(0 1.2rem, 100% 0, 100% calc(100% - 1.2rem), 0 100%); }
   .hero-inner { padding: 7.5rem 0 5rem; }
-  .hero-ticker li + li::before { width: 14px; margin: 0 0.55rem; }
+  /* drop the rule separators so wrapped lines never start with a dangling dash */
+  .hero-ticker { gap: 0.5rem 1.1rem; }
+  .hero-ticker li + li::before { display: none; }
   .footer-base { justify-content: center; text-align: center; }
 }

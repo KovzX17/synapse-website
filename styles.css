@@ -555,15 +555,24 @@ em { font-style: italic; }
 
 .service-stack { display: flex; flex-direction: column; }
 
+/* Title spans the top; the visual and its bullet list sit side by side below it,
+   so the points read level with the image rather than floating up by the heading. */
 .service {
   display: grid;
   grid-template-columns: minmax(280px, 1fr) 1.25fr;
-  gap: 3rem;
+  grid-template-areas:
+    "head  head"
+    "media body";
+  column-gap: 3rem;
+  row-gap: 1.8rem;
   padding: 3.4rem 0;
   border-top: 1px solid var(--line);
   position: relative;
   align-items: start;
 }
+.service-meta { grid-area: head; }
+.service-media { grid-area: media; align-self: center; }
+.service-body { grid-area: body; align-self: center; }
 .service:last-child { border-bottom: 1px solid var(--line); }
 .service::before {
   content: "";
@@ -605,7 +614,6 @@ em { font-style: italic; }
 
 /* Product visuals from the Synapse brochure */
 .service-media {
-  margin-top: 1.6rem;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 18px;
@@ -856,7 +864,11 @@ body.menu-open { overflow: hidden; }
 @media (max-width: 900px) {
   .about-body, .vm-grid { grid-template-columns: 1fr; }
   .vm-grid { gap: 3.5rem; }
-  .service { grid-template-columns: 1fr; gap: 1.6rem; }
+  .service {
+    grid-template-columns: 1fr;
+    grid-template-areas: "head" "media" "body";
+    row-gap: 1.6rem;
+  }
   .values-grid { grid-template-columns: 1fr 1fr; }
   .value-card, .value-card.wide { grid-column: span 1; }
   .footer-grid { grid-template-columns: 1fr; gap: 2.2rem; }

@@ -26,9 +26,14 @@ Plain HTML + CSS + vanilla JavaScript. No build step, no frameworks.
 
 ## Images
 
-`images/logo.png` is the supplied stacked brand logo with its background keyed to transparency.
+`images/logo.png` is the final brand logo with its background keyed to transparency.
 `images/logo-horizontal.png` is a horizontal lockup of that same artwork (mark beside wordmark)
-for the slim nav bar. The six product visuals are extracted from the brochure's solution cards.
+for the slim nav bar, and `images/favicon.png` is the mark on its own. The six product visuals
+are extracted from the brochure's solution cards.
+
+## Deploy
+
+Any static host works — the repository root is the site root, no build step required.
 
 ## Run locally
 
